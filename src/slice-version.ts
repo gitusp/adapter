@@ -8,7 +8,7 @@ export const createAdapter = <A> (): Adapter<A, A> => {
 }
 
 const broadcast = <A> (sinks: { sink: Sink<A>, scheduler: Scheduler }[], a: A): void =>
-  sinks.slice().forEach(({ sink, scheduler }) => tryEvent(scheduler.currentTime(), a, sink))
+  sinks.slice(0).forEach(({ sink, scheduler }) => tryEvent(scheduler.currentTime(), a, sink))
 
 export class FanoutPortStream<A> {
   constructor (private readonly sinks: { sink: Sink<A>, scheduler: Scheduler }[]) {}
